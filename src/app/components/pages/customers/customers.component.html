@@ -1,0 +1,59 @@
+<app-navbar></app-navbar>
+
+<div class="container">
+    @if(customers){
+        <div class="card custom-card shadow">
+            <div class="card-header">
+                <h5 class="font">Customers</h5>
+                <div class="input-group" style="border: 1px solid #687078; max-width: 520px;">
+                    <input type="text" class="form-control rounded-0 italic" [formControl]="searchForm" placeholder="Search by customer name">
+                    <button class="btn btn-info custom-btn rounded-0 d-flex justify-content-center align-items-center" (click)="search()">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <!-- <table width="100%" border="0" align="center" cellpadding="3" cellspacing="3" class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th width="20%" align="center" valign="top" style="background-color:#bed1dd">ID</th>
+                            <th width="20%" align="center" valign="top" style="background-color:#bed1dd">Name</th>
+                            <th width="20%" align="center" valign="top" style="background-color:#bed1dd">Email</th>
+                            <th width="20%" align="center" valign="top" style="background-color:#bed1dd">Is user app</th>
+                            <th width="20%" align="center" valign="top" style="background-color:#bed1dd">Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (cust of customers; track $index) {
+                            <tr>
+                                <td width="0%" align="left">{{cust.id}}</td>
+                                <td width="0%" align="left">{{cust.name}}</td>
+                                <td width="0%" align="left">{{cust.email}}</td>
+                                <td width="0%" align="left">{{isUserApp(cust) ? "yes" : "no"}}</td>
+                                @if (auth.checkRole(auth.roles[0])) {
+                                <td width="0%" align="left">
+                                    <button class="btn btn-danger" (click)="deleteCustomer(cust)">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </td>
+                                }
+                            </tr>
+                        }
+                    </tbody>
+                </table> -->
+
+                <app-table
+                    (buttonColumnEvent)="onClickDeleteButton($event)"
+                    [jsons]="customers" 
+                    [columnLabels]="['ID','Name','Email']"
+                    [displayColumns]="['id','name','email']"
+                    [buttonColumn]="'Delete'"
+                    [buttonColumnClass]="'btn btn-danger'"
+                    [buttonColumnIcon]="'bi bi-trash'"
+                    [pageNumber]="0"
+                    [currentPage]="0">
+                </app-table>
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,68 @@
+<div class="card custom-card shadow">
+    <div class="card-header d-flex justify-content-center align-items-center pb-0">
+        <h5 class="font">Create New User</h5>
+    </div>
+    <div class="card-body">
+        <div class="card-body">
+            <div class="row col-md-12">
+                <div class="col-md-4"></div>
+                <div class="col-md-4 p-3" style="border: 1px solid gray;">
+
+                    <form [formGroup]="createUserFormGroup" method="post" (ngSubmit)="sendNewAppUser()" class="m-2">
+
+                        <app-form-input
+                            [name]="'username'"
+                            [val]="''"
+                            [fg]="createUserFormGroup"
+                            [label]="'USERNAME'" 
+                            [show]="true">
+                        </app-form-input>
+
+                        <app-form-input
+                            [name]="'password'"
+                            [val]="''"
+                            [fg]="createUserFormGroup"
+                            [label]="'PASSWORD'" 
+                            [show]="true">
+                        </app-form-input>
+                        
+                        <app-form-input 
+                            [name]="'roleId'"
+                            [val]="currentRoleId"
+                            [currentForm]="'select'" 
+                            [fg]="createUserFormGroup"
+                            [label]="'ROLES'" 
+                            [show]="true">
+                            <option value="" selected>No role selected</option>
+                            @for (role of roles; track role) {
+                                <option [value]="role.id">
+                                    <p>{{role.roleName}}</p>
+                                </option>
+                            }
+                        </app-form-input>
+
+                        <app-form-input 
+                            [name]="'customerId'"
+                            [val]="''"
+                            [currentForm]="'select'" 
+                            [fg]="createUserFormGroup"
+                            [label]="'CUSTOMER'" 
+                            [show]="createUserFormGroup.value.roleId==='2'">
+                            <option value="" selected>No customer selected</option>
+                            @for (cust of customers; track cust) {
+                                <option [value]="cust.id">
+                                    <p>{{cust.name}}</p>
+                                </option>
+                            }
+                        </app-form-input>
+                        
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-success" [disabled]="createUserFormGroup.invalid">Create user</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,40 @@
+<nav class="navbar navbar-expand-lg back-header py-0" data-bs-theme="dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Banking System</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/home" routerLinkActive="active">Home</a>
+        </li>
+        <li class="nav-item" [hidden]="!auth.checkRole(auth.roles[0])">
+          <a class="nav-link" routerLink="/accounts" routerLinkActive="active">Accounts</a>
+        </li>
+        <li class="nav-item" [hidden]="!auth.checkRole(auth.roles[0])">
+          <a class="nav-link" routerLink="/customers" routerLinkActive="active">Customers</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            User Info
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end rounded-0 back-header">
+            <li><a class="dropdown-item">Role: {{currentUser.appRole.roleName}}</a></li>
+            <li><a class="dropdown-item">Username: {{currentUser.username}}</a></li>
+            @if(auth.checkRole(auth.roles[1])){
+              <li><a class="dropdown-item">Customer email: {{currentUser.customer.email}}</a></li>
+              <li><a class="dropdown-item">Customer name: {{currentUser.customer.name}}</a></li>
+            }
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" routerLink="" (click)="logout()">Logout</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="mb-1"></div>

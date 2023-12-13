@@ -1,1 +1,51 @@
 /* You can add global styles to this file, and also import other style files */
+@import "../node_modules/bootstrap-icons/font/bootstrap-icons.css";
+
+body{
+    background-color: #E7E9EB !important;
+}
+
+.back-header {
+  background-color: #0f2b3d !important;
+}
+
+.italic::placeholder {
+  font-style: italic;
+}
+
+.form-control,
+.form-select {
+  height: 30px;
+  border-radius: 0 !important;
+}
+
+.form-select {
+  padding: 0 0 6px 8px !important;
+}
+
+/*  */
+.form-control:focus {
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px rgba(94, 116, 245, 0.5) !important;
+}
+
+.search-form {
+  border: 1px solid #687078; 
+  max-width: 520px;
+}
+
+.btn-search-form {
+  height: 30px; 
+  text-align: center;
+}
+
+.custom-btn {
+  height: 30px;
+}
+
+.custom-card {
+  border-radius: 0% !important;
+}
+
+.font {
+  font-family: "Helvetica Neue",Roboto,Arial,sans-serif;
+}

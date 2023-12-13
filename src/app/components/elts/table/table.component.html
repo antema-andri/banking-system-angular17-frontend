@@ -1,0 +1,60 @@
+<table class="table table-sm">
+    <thead>
+        <tr>
+            @for(col of [].constructor(colNumber); track col; let index=$index){
+                <th width="20%" align="center" valign="top" style="background-color:#bed1dd">
+                    {{columnLabels[index]}}
+                </th>
+            }
+
+            @if(buttonColumn){
+                <th width="20%" align="center" valign="top" style="background-color:#bed1dd">
+                    {{buttonColumn}}
+                </th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @for(row of [].constructor(rowNumber); track row; let i=$index){
+            <tr>
+                @for(col of [].constructor(colNumber); track col; let j=$index){
+                    @if(linkColumns && linkColumns[j]==displayColumns[j]){
+                        <td>
+                            <button type="button" class="btn btn-link py-0" (click)="emitClickEvent(datas[i][j])">
+                                {{datas[i][j]}}
+                            </button>
+                        </td>
+                    }@else {
+                        <td width="20%" align="left">{{datas[i][j]}}</td>
+                    }
+                }
+
+                @if(buttonColumn){
+                    <td width="0%" align="left">
+                        <button [class]="buttonColumnClass" (click)="emitButtonColumnEvent(datas[i][0])">
+                            <i [class]="buttonColumnIcon"></i>
+                        </button>
+                    </td>
+                }
+            </tr>
+        }@empty {
+            <tr>
+                <td [colSpan]="colNumber" class="text-center">
+                    <p>No datas found</p>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<nav aria-label="...">
+    <ul class="pagination">
+    @for (item of [].constructor(pageNumber); track item; let i=$index) {
+        <li class="page-item" [ngClass]="currentPage==i?'active':''">
+            <a class="page-link" (click)="emitPaginateEvent(i)" style="cursor: pointer;">
+                {{i+1}}
+            </a>
+        </li>
+    }
+    </ul>
+</nav>

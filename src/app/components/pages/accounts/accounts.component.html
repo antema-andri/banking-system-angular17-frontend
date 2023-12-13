@@ -1,0 +1,102 @@
+<app-navbar></app-navbar>
+
+<div class="container">
+
+    <div class="card custom-card shadow">
+        <div class="card-header">
+            <h5 class="font">Search Account</h5>
+            <div class="input-group" style="border: 1px solid #687078; max-width: 520px;">
+                <button class="btn btn-info custom-btn rounded-0 d-flex justify-content-center align-items-center" (click)="search(0)" style="height: 30px; text-align: center;">
+                    <i class="bi bi-search"></i>
+                </button>
+                <input type="text" class="form-control rounded-0 italic" [formControl]="searchForm" placeholder="Search by customer">
+            </div>
+        </div>
+        <div class="card-body">
+            
+            <app-table
+                (clickEvent)="clickGenerate($event)"
+                (paginateEvent)="paginateClick($event)" 
+                [jsons]="accountPage?accountPage.accounts:[]" 
+                [columnLabels]="['ID','SOLD','EXCHANGE']"
+                [displayColumns]="['id','balance','currency']"
+                [linkColumnContents]="['#']"
+                [linkColumns]="['id']"
+                [pageNumber]="accountPage?accountPage.totalPages:0"
+                [currentPage]="0">
+            </app-table>
+
+            <div class="card mt-3 rounded-0">
+                <div class="card-header d-flex justify-content-center align-items-center pb-0"><h6 class="font p-0">New transaction</h6></div>
+                @if (selectedAccount!=null) {
+                    <div class="card-body">
+                        <div class="row col-md-12">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-4">
+                                <label>Current Balance: ${{selectedAccount.balance}}</label>
+                                <form [formGroup]="accountFormGroup" method="post" (ngSubmit)="sendOperation()" class="m-2">
+                                    @for (ops of operationTypes; track $index) {
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" formControlName="operationType" [value]="this.operationTypes[$index]" (change)="updateCurretOp(this.operationTypes[$index])">
+                                            <label class="form-check-label">{{operationLabels[$index]}}</label>
+                                        </div>
+                                    }
+                            
+                                    <div class="mb-3">
+                                        <label class="form-label">AMOUNT</label>
+                                        <input class="form-control" type="number" min="5" formControlName="amount">
+                                    </div>
+
+                                    <app-form-input 
+                                        [name]="'accountDestination'"
+                                        [val]="''"
+                                        [currentForm]="'select'" 
+                                        [fg]="accountFormGroup"
+                                        [label]="'ACCOUNT DESTINATION'" 
+                                        [show]="isCurrentOperation(this.operationTypes[2])">
+                                        <option value="" selected>{{defaultSelectValue}}</option>
+                                        @for (acc of accounts; track acc) {
+                                            <option [value]="acc.id" [disabled]="acc.id==selectedAccount.id">
+                                                <p>{{acc.customer.name}} ({{acc.type}})</p>
+                                            </option>
+                                        }
+                                    </app-form-input>
+                                    
+                                    <app-form-input
+                                        [name]="'description'"
+                                        [val]="this.descOperations[0]"
+                                        [fg]="accountFormGroup"
+                                        [label]="'DESCRIPTION'" 
+                                        [show]="!isCurrentOperation(this.operationTypes[2])">
+                                    </app-form-input>
+                                    
+                                    <input type="hidden" formControlName="accountId">
+                                    <div class="d-grid gap-2">
+                                        <button type="submit" class="btn btn-success" [disabled]="accountFormGroup.invalid">Send transaction</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+                    </div>
+                }
+                <!-- <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Date</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let accOp of accountOperationPage.accountOperations">
+                            <td>{{accOp.id}}</td>
+                            <td>{{accOp.date}}</td>
+                            <td>{{accOp.amount}}</td>
+                        </tr>
+                    </tbody>
+                </table> -->
+            </div>
+        </div>
+    </div>
+</div>

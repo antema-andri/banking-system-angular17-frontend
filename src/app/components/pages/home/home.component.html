@@ -1,0 +1,28 @@
+<app-navbar></app-navbar>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <ul class="list-group shadow rounded-0">
+                @if (auth.checkRole(auth.roles[0])){
+                    <a routerLink="user-list" routerLinkActive="active" class="list-group-item list-group-item-action">
+                        Users list
+                    </a>
+                    <a routerLink="add-user" routerLinkActive="active" class="list-group-item list-group-item-action">
+                        New user
+                    </a>
+                }@else if (auth.checkRole(auth.roles[1])) {
+                    <a class="list-group-item list-group-item-action">
+                        <a>Operations list (CA)</a>
+                    </a>
+                    <a class="list-group-item list-group-item-action">
+                        <a>Operations list (SA)</a>
+                    </a>
+                }
+            </ul>
+        </div>
+        <div class="col-md-9">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

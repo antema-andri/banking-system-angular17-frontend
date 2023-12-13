@@ -1,0 +1,8 @@
+<div class="wrapper">
+    <form [formGroup]="validateLoginForm" (ngSubmit)="onSignin()" class="form-signin">
+        <h2 class="form-signin-heading my-5 text-center">Banking System</h2>
+        <input type="text" class="form-control custom-form" placeholder="Username" formControlName="username"/>
+        <input type="password" class="form-control custom-form" placeholder="Password" formControlName="password"/>
+        <button [disabled]="validateLoginForm.invalid" class="btn btn-primary btn-lg custom-btn d-flex justify-content-center align-items-center" type="submit">Sign in</button>
+    </form>
+</div>
