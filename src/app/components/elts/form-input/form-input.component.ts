@@ -47,7 +47,6 @@ export class FormInputComponent implements ControlValueAccessor, OnInit, OnChang
   @Input() css:string='form-control';
   @Input() show:boolean=false;
   @Input() label!:string;
-  propagateChange = (_: any) => {};
 
   ngOnInit(): void {
     this.settingForm();
@@ -81,9 +80,7 @@ export class FormInputComponent implements ControlValueAccessor, OnInit, OnChang
     this.val=value;
   }
 
-  registerOnChange(fn: any): void {
-    this.propagateChange = fn;
-  }
+  registerOnChange(fn: any): void {}
 
   registerOnTouched(fn: any): void {}
 
