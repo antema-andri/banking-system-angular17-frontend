@@ -17,9 +17,9 @@
             <app-table
                 (clickEvent)="clickGenerate($event)"
                 (paginateEvent)="paginateClick($event)" 
-                [jsons]="accountPage?accountPage.accounts:[]" 
-                [columnLabels]="['ID','SOLD','EXCHANGE']"
-                [displayColumns]="['id','balance','currency']"
+                [jsons]="accountTabs?accountTabs:[]" 
+                [columnLabels]="['ID','BALANCE($)','CURRENCY','CUSTOMER','CUSTOMER EMAIL']"
+                [displayColumns]="['id','balance','currency','customerName','customerEmail']"
                 [linkColumnContents]="['#']"
                 [linkColumns]="['id']"
                 [pageNumber]="accountPage?accountPage.totalPages:0"
@@ -64,7 +64,7 @@
                                     
                                     <app-form-input
                                         [name]="'description'"
-                                        [val]="this.descOperations[0]"
+                                        [val]="getOperationDesc()"
                                         [fg]="accountFormGroup"
                                         [label]="'DESCRIPTION'" 
                                         [show]="!isCurrentOperation(this.operationTypes[2])">
@@ -80,22 +80,6 @@
                         </div>
                     </div>
                 }
-                <!-- <table class="table">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Date</th>
-                            <th>Amount</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let accOp of accountOperationPage.accountOperations">
-                            <td>{{accOp.id}}</td>
-                            <td>{{accOp.date}}</td>
-                            <td>{{accOp.amount}}</td>
-                        </tr>
-                    </tbody>
-                </table> -->
             </div>
         </div>
     </div>

@@ -31,7 +31,7 @@ export class CustomerService {
   }
 
   async searchCustomers(keyWord:string):Promise<Customer[]>{
-    const customers=await this.api.get('/customers/search?world='+keyWord)
+    const customers=await this.api.get('/customers/search?word='+keyWord)
             .then((data)=>{
               return data.body as Customer[];
             });

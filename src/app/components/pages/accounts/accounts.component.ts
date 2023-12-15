@@ -1,4 +1,4 @@
-import { Component, OnChanges, OnInit, SimpleChanges, ViewChild, ViewEncapsulation, inject } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -11,6 +11,7 @@ import { AccountOperationPage } from '../../../models/accountDetails.model';
 import { Debit } from '../../../models/debit.model';
 import { Credit } from '../../../models/credit.model';
 import { Transfer } from '../../../models/transfer.model';
+import { AccountTable } from '../../../models/accountTable.model';
 
 @Component({
   selector: 'app-accounts',
@@ -25,11 +26,12 @@ import { Transfer } from '../../../models/transfer.model';
   encapsulation: ViewEncapsulation.None,
   templateUrl: './accounts.component.html'
 })
-export class AccountsComponent implements OnInit, OnChanges{
+export class AccountsComponent implements OnInit{
   private fb=inject(FormBuilder);
   private accountServ=inject(AccountsService);
   accounts!:Account[];
   accountPage!:AccountPage;
+  accountTabs!:AccountTable[];
   selectedAccount!:Account|null;
   currentPage!:number;
   accountOperationPage!:AccountOperationPage|null;
@@ -47,18 +49,32 @@ export class AccountsComponent implements OnInit, OnChanges{
     this.selectedAccount=null;
     this.loadFormGroup();
     this.loadAccounts();
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes) {
-      this.accountFormGroup.updateValueAndValidity({onlySelf:true,emitEvent:true});
-    }
+    this.updateCurretOp(this.operationTypes[0]);
   }
 
   async search(page:number){
     this.selectedAccount=this.currentPage==page?this.selectedAccount:null;
     this.currentPage=page;
     this.accountPage=await this.accountServ.getAccountsByCustomerName(this.searchForm.value,page,1);
+    this.loadAccountTab();
+  }
+
+  loadAccountTab(){
+    const temps:AccountTable[]=[];
+    for(const acc of this.accountPage.accounts){
+      const accountTable:AccountTable={
+        id: acc.id,
+        balance: acc.balance,
+        createdAt: acc.createdAt,
+        status: acc.status,
+        currency: acc.currency,
+        type: acc.type,
+        customerName: acc.customer ? acc.customer.name : null,
+        customerEmail: acc.customer ? acc.customer.email : null
+      }
+      temps.push(accountTable);
+    }
+    this.accountTabs=temps;
   }
 
   async loadCurrentAccount(account:Account){
@@ -113,19 +129,18 @@ export class AccountsComponent implements OnInit, OnChanges{
 
   updateCurretOp(operationType:string){
     this.currentOperation=operationType;
-
-    if(this.currentOperation==this.operationTypes[0]){
-      this.accountFormGroup.patchValue({'description':this.descOperations[0]});
-    }else if(this.currentOperation==this.operationTypes[1]){
-      this.accountFormGroup.patchValue({'description':this.descOperations[1]});
-    }
+    this.accountFormGroup.patchValue({'description':this.getOperationDesc()});
   }
 
-  async debitOperation(){}
-
-  async creditOperation(){}
-
-  async transferOperation(){}
+  getOperationDesc():string{
+    let op="";
+    if(this.currentOperation===this.operationTypes[0]){
+      op=this.descOperations[0];
+    }else if(this.currentOperation===this.operationTypes[1]){
+      op=this.descOperations[1];
+    }
+    return op;
+  }
 
   clickGenerate(event:any) {
     const idAccountClicked=event;
@@ -137,5 +152,4 @@ export class AccountsComponent implements OnInit, OnChanges{
     const indexPage=event;
     this.search(indexPage);
   }
-  
 }

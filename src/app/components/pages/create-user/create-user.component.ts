@@ -7,6 +7,7 @@ import { CustomerService } from '../../../services/customer.service';
 import { CommonModule } from '@angular/common';
 import { AppUserService } from '../../../services/app-user.service';
 import { CreateUser } from '../../../models/createUser.model';
+import { User } from '../../../models/user.model';
 
 @Component({
   selector: 'app-create-user',
@@ -41,7 +42,19 @@ export class CreateUserComponent implements OnInit {
       customerId:this.createUserFormGroup.value.customerId,
       roleId:this.createUserFormGroup.value.roleId
     }
-    await this.userServ.createUser(createUser);
+
+    const newUser:User=await this.userServ.createUser(createUser)
+    this.loadCustomers();
+    this.resetFormGroup();
+    this.createUserFormGroup.markAsDirty();
+  }
+
+  resetFormGroup(){
+    this.createUserFormGroup.setValue({
+      username: '',
+      password: '',
+      roleId: ''
+    });
   }
   
   loadFormGroup(){
@@ -59,4 +72,5 @@ export class CreateUserComponent implements OnInit {
   setCurrentRole(roleId:string){
     this.currentRoleId=roleId;
   }
+  
 }

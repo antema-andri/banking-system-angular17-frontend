@@ -36,6 +36,7 @@ export class AppUserService {
   async createUser(createUser:CreateUser):Promise<User>{
     const appUser=await this.api.post("/users", createUser)
                             .then((data)=>{
+                              alert("user "+data.body.username+" successfully created");
                               return data.body as User;
                             });
     return appUser;
