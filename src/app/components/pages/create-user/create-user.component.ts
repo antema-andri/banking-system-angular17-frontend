@@ -50,11 +50,9 @@ export class CreateUserComponent implements OnInit {
   }
 
   resetFormGroup(){
-    this.createUserFormGroup.setValue({
-      username: '',
-      password: '',
-      roleId: ''
-    });
+    this.createUserFormGroup.patchValue({'username':''});
+    this.createUserFormGroup.patchValue({'password':''});
+    this.createUserFormGroup.patchValue({'roleId':''});
   }
   
   loadFormGroup(){

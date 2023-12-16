@@ -69,10 +69,8 @@ export class FormInputComponent implements ControlValueAccessor, OnInit, OnChang
   updateFormGroup(){
     if(this.show==true){
         this.fg.addControl(this.name,new FormControl(this.val,[Validators.required]));
-    }else{
-      if(this.fg.contains(this.name)){
-        this.fg.removeControl(this.name);
-      }
+    }else if(this.fg.contains(this.name)){
+      this.fg.removeControl(this.name);
     }
   }
 
