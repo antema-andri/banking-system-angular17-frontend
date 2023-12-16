@@ -15,30 +15,41 @@ export class CustomerService {
   }
 
   async getCustomers():Promise<Customer[]>{
-    const customers=await this.api.get('/customers')
-            .then((data)=>{
-              return data.body as Customer[];
-            });
-    return customers;
+    try {
+      const data=await this.api.get('/customers');
+      return data.body as Customer[];
+    } catch (error) {
+      console.error('Error fetching customers:', error);
+      throw error;
+    }
   }
 
   async getCustomersNotUser():Promise<Customer[]>{
-    const customers=await this.api.get('/customers/notuser')
-            .then((data)=>{
-              return data.body as Customer[];
-            });
-    return customers;
+    try {
+      const data=await this.api.get('/customers/notuser');
+      return data.body as Customer[];
+    } catch (error) {
+      console.error('Error fetching customers:', error);
+      throw error;
+    }
   }
 
   async searchCustomers(keyWord:string):Promise<Customer[]>{
-    const customers=await this.api.get('/customers/search?word='+keyWord)
-            .then((data)=>{
-              return data.body as Customer[];
-            });
-    return customers;
+    try {
+      const data=await this.api.get('/customers/search?word='+keyWord);
+      return data.body as Customer[];
+    } catch (error) {
+      console.error('Error fetching customers:', error);
+      throw error;
+    }
   }
 
   async deleteCustomer(idCustomer:number){
-    await this.api.delete('/customers/'+idCustomer);
+    try {
+      await this.api.delete('/customers/'+idCustomer);
+    } catch (error) {
+      console.error('Error deleting customer:', error);
+      throw error;
+    }
   }
 }

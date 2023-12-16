@@ -18,27 +18,33 @@ export class AppUserService {
   }
 
   async getAppUsers():Promise<User[]>{
-    const appUsers=await this.api.get("/users")
-                            .then((data)=>{
-                              return data.body as User[];
-                            });
-    return appUsers;
+    try {
+      const data=await this.api.get("/users");
+      return data.body as User[];
+    } catch (error) {
+      console.error('Error fetching users:', error);
+      throw error;
+    }
   }
 
   async getRoles():Promise<Role[]>{
-    const roles=await this.api.get("/roles")
-                          .then((data)=>{
-                            return data.body as Role[];
-                          });
-    return roles;
+    try{
+      const data=await this.api.get("/roles")
+      return data.body as Role[];
+    } catch (error) {
+      console.error('Error fetching roles:', error);
+      throw error;
+    }
   }
 
   async createUser(createUser:CreateUser):Promise<User>{
-    const appUser=await this.api.post("/users", createUser)
-                            .then((data)=>{
-                              alert("user "+data.body.username+" successfully created");
-                              return data.body as User;
-                            });
-    return appUser;
+    try{
+      const data=await this.api.post("/users", createUser)
+      alert("user "+data.body.username+" successfully created");
+      return data.body as User;
+    } catch (error) {
+      console.error('Error creating user:', error);
+      throw error;
+    }
   }
 }
