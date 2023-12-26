@@ -3,6 +3,6 @@ import { Customer } from "./customer.model";
 export interface CreateUser {
     username:string;
     password:string;
-    roleId:string;
+    roleName:string;
     customerId:string;
 }

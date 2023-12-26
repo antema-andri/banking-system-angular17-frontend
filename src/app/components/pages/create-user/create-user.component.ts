@@ -27,12 +27,11 @@ export class CreateUserComponent implements OnInit {
   createUserFormGroup!:FormGroup;
   customers!:Customer[];
   roles!:Role[];
-  currentRoleId:String='';
 
   ngOnInit(): void {
-    this.loadFormGroup();
     this.loadCustomers();
     this.loadRoles();
+    this.loadFormGroup();
   }
 
   async sendNewAppUser(){
@@ -40,9 +39,9 @@ export class CreateUserComponent implements OnInit {
       username:this.createUserFormGroup.value.username,
       password:this.createUserFormGroup.value.password,
       customerId:this.createUserFormGroup.value.customerId,
-      roleId:this.createUserFormGroup.value.roleId
+      roleName:this.createUserFormGroup.value.roleName
     }
-
+  
     const newUser:User=await this.userServ.createUser(createUser)
     this.loadCustomers();
     this.resetFormGroup();
@@ -52,7 +51,7 @@ export class CreateUserComponent implements OnInit {
   resetFormGroup(){
     this.createUserFormGroup.patchValue({'username':''});
     this.createUserFormGroup.patchValue({'password':''});
-    this.createUserFormGroup.patchValue({'roleId':''});
+    this.createUserFormGroup.patchValue({'roleName':''});
   }
   
   loadFormGroup(){
@@ -66,9 +65,4 @@ export class CreateUserComponent implements OnInit {
   async loadRoles(){
     this.roles=await this.userServ.getRoles();
   }
-
-  setCurrentRole(roleId:string){
-    this.currentRoleId=roleId;
-  }
-  
 }

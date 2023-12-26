@@ -28,15 +28,15 @@
                         </app-form-input>
                         
                         <app-form-input 
-                            [name]="'roleId'"
-                            [val]="currentRoleId"
+                            [name]="'roleName'"
+                            [val]="''"
                             [currentForm]="'select'" 
                             [fg]="createUserFormGroup"
                             [label]="'ROLES'" 
                             [show]="true">
                             <option value="" selected>No role selected</option>
                             @for (role of roles; track role) {
-                                <option [value]="role.id">
+                                <option [value]="role.roleName">
                                     <p>{{role.roleName}}</p>
                                 </option>
                             }
@@ -48,7 +48,7 @@
                             [currentForm]="'select'" 
                             [fg]="createUserFormGroup"
                             [label]="'CUSTOMER'" 
-                            [show]="createUserFormGroup.value.roleId==='2'">
+                            [show]="createUserFormGroup.value.roleName=='USER'">
                             <option value="" selected>No customer selected</option>
                             @for (cust of customers; track cust) {
                                 <option [value]="cust.id">
