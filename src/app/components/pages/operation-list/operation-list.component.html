@@ -1,0 +1,26 @@
+<div class="container">
+
+    <div class="card custom-card shadow">
+        <div class="card-header">
+            <h5 class="font">Search operation</h5>
+            <div class="input-group" style="border: 1px solid #687078; max-width: 520px;">
+                <button class="btn btn-info custom-btn rounded-0 d-flex justify-content-center align-items-center" style="height: 30px; text-align: center;">
+                    <i class="bi bi-search"></i>
+                </button>
+                <input type="text" class="form-control rounded-0 italic" placeholder="Search by date operation">
+            </div>
+        </div>
+        <div class="card-body">
+            
+            <app-table
+                [jsons]="operationTabs?operationTabs:[]"
+                [columnLabels]="['ID', 'AMOUNT($)', 'DATE', 'ACCOUNT', 'OPERATION']"
+                [displayColumns]="['id','amount','date','accountType','operationType']"
+                [linkColumnContents]="['#']"
+                [linkColumns]="['id']"
+                [pageNumber]="operationPage?operationPage.totalPages:0"
+                [currentPage]="0">
+            </app-table>
+
+        </div>
+</div>

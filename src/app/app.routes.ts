@@ -12,17 +12,16 @@ export const routes: Routes = [
         canActivate:[isAuthenticated],
         children: [
             {
-                path: '',
-                redirectTo: 'user-list',
-                pathMatch: 'full',
-            },
-            {
                 path: 'user-list',
                 loadComponent: () => import('./components/pages/user-list/user-list.component').then(mod => mod.UserListComponent),
             },
             {
                 path: 'add-user',
                 loadComponent: () => import('./components/pages/create-user/create-user.component').then(mod => mod.CreateUserComponent),
+            },
+            {
+                path: 'operation-list/:accountType',
+                loadComponent: () => import('./components/pages/operation-list/operation-list.component').then(mod => mod.OperationListComponent)
             }
         ]
     },

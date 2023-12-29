@@ -41,6 +41,16 @@ export class AccountsService {
     }
   }
 
+  async getAccountsByCustomerId(customerId:string):Promise<Account[]>{
+    try {
+      const data=await this.api.get("/accounts/customer/"+customerId);
+      return data.body as Account[];
+    } catch (error) {
+      console.error('Error fetching accounts by customerId:', error);
+      throw error;
+    }
+  }
+
   async getAccountOperations(accountId: string):Promise<AccountOperationPage>{
     try {
       const data=await this.api.get("/accounts/"+accountId+"/operationsPage");
