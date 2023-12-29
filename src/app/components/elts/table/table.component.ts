@@ -66,25 +66,15 @@ export class TableComponent implements OnInit, OnChanges {
   }
 
   toDataStrDisplay(jsonObjects:{}[]):string[][]{
-    const diplayDatas:string[][]=[];
+    const displayDatas:string[][]=[];
     const allDatas:string[][]=this.toDataStr(jsonObjects);
-    let indexes:number[]=[];
-
-    for(let j=0;j<this.displayColumns.length;j++){
-      if(this.fields.includes(this.displayColumns[j])){
-        const indexField=this.fields.indexOf(this.displayColumns[j]);
-        indexes.push(indexField);
-      }
-    }
-
-    indexes=indexes.sort((a, b) => a - b);
 
     for(const dataRow of allDatas){
-      const row: string[] = indexes.map(index => dataRow[index]);
-      diplayDatas.push(row);
+      const row: string[] = this.displayColumns.map(column => dataRow[this.fields.indexOf(column)]);
+      displayDatas.push(row);
     }
 
-    return diplayDatas;
+    return displayDatas;
   }
 
   emitClickEvent(val:any) {

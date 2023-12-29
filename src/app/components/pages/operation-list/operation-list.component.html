@@ -14,8 +14,8 @@
             
             <app-table
                 [jsons]="operationTabs?operationTabs:[]"
-                [columnLabels]="['ID', 'AMOUNT($)', 'DATE', 'ACCOUNT', 'OPERATION']"
-                [displayColumns]="['id','amount','date','accountType','operationType']"
+                [columnLabels]="['ID', 'AMOUNT($)', 'DATE', 'ACCOUNT', 'OPERATION','DESCRIPTION']"
+                [displayColumns]="['id','amount','date','accountType','operationType','description']"
                 [linkColumnContents]="['#']"
                 [linkColumns]="['id']"
                 [pageNumber]="operationPage?operationPage.totalPages:0"
