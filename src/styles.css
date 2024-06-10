@@ -5,6 +5,31 @@ body{
     background-color: #E7E9EB !important;
 }
 
+/*** start login ***/
+.login-wrapper {
+	margin-top: 80px;
+}
+
+.form-signin {
+	max-width: 380px;
+	padding: 15px 35px 45px;
+	margin: 0 auto;
+	background-color: #fff;
+	border: 1px solid rgba(175, 136, 136, 0.1);
+}
+
+.custom-form {
+	margin: 10px 0;
+	height: 36px !important;
+}
+
+.custom-btn {
+	font-size: 20px;
+	border-radius: 5px !important;
+  background-color: rgb(99, 102, 241) !important;
+}
+/*** end login ***/
+
 .back-header {
   background-color: #0f2b3d !important;
 }
@@ -36,10 +61,6 @@ body{
 .btn-search-form {
   height: 30px; 
   text-align: center;
-}
-
-.custom-btn {
-  height: 30px;
 }
 
 .custom-card {

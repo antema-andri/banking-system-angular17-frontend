@@ -6,7 +6,6 @@ import { Role } from '../../../models/role.model';
 import { CustomerService } from '../../../services/customer.service';
 import { CommonModule } from '@angular/common';
 import { AppUserService } from '../../../services/app-user.service';
-import { CreateUser } from '../../../models/createUser.model';
 import { User } from '../../../models/user.model';
 
 @Component({
@@ -35,14 +34,15 @@ export class CreateUserComponent implements OnInit {
   }
 
   async sendNewAppUser(){
-    const createUser:CreateUser={
+    const appUser:User={
+      id:0,
       username:this.createUserFormGroup.value.username,
       password:this.createUserFormGroup.value.password,
-      customerId:this.createUserFormGroup.value.customerId,
-      roleName:this.createUserFormGroup.value.roleName
+      customer:{id: this.createUserFormGroup.value.customerId, name:'', email:'', bankAccounts:[]},
+      appRole:{id:0, roleName:this.createUserFormGroup.value.roleName}
     }
   
-    const newUser:User=await this.userServ.createUser(createUser)
+    const newUser:User=await this.userServ.createAppUser(appUser);
     this.loadCustomers();
     this.resetFormGroup();
     this.createUserFormGroup.markAsDirty();

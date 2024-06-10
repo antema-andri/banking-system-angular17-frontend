@@ -2,7 +2,6 @@ import { Injectable, inject } from '@angular/core';
 import { ApiService } from './api.service';
 import { User } from '../models/user.model';
 import { Role } from '../models/role.model';
-import { CreateUser } from '../models/createUser.model';
 
 const JWT_LOCALSTORE_KEY="token";
 
@@ -37,9 +36,9 @@ export class AppUserService {
     }
   }
 
-  async createUser(createUser:CreateUser):Promise<User>{
+  async createAppUser(appUser:User):Promise<User>{
     try{
-      const data=await this.api.post("/users", createUser)
+      const data=await this.api.post("/users", appUser);
       alert("user "+data.body.username+" successfully created");
       return data.body as User;
     } catch (error) {

@@ -1,5 +1,5 @@
 export interface Customer {
-    id: number;
+    id: number|any;
     name: string;
     email: string;
     bankAccounts: [];

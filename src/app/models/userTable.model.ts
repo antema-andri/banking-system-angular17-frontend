@@ -1,5 +1,5 @@
 export interface UserTable {
-    id:string;
+    id:string|null|number;
     username: string;
     password: string;
     name:string|null; //name customer
