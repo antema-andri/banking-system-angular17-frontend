@@ -11,6 +11,7 @@ import { AccountsService } from '../../../services/accounts.service';
 import { AuthService } from '../../../services/auth.service';
 import { AccountOperationPage } from '../../../models/accountDetails.model';
 import { Account } from '../../../models/account.model';
+import { DateUtil } from '../../../utils/date-utils';
 
 @Component({
   selector: 'app-operation-list',
@@ -68,7 +69,7 @@ export class OperationListComponent implements OnInit {
     for(const accOp of this.operationPage.accountOperations){
       const accountTable:AccountOperationTable={
         id: accOp.id,
-        date: accOp.date,
+        date: DateUtil.formatDate(new Date(accOp.date)),
         amount: accOp.amount,
         description: accOp.description,
         accountType: accOp.bankAccount.type,
