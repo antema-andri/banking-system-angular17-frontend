@@ -5,20 +5,20 @@
         <div class="col-md-3">
             <ul class="list-group shadow rounded-0">
                 @if (authServ.checkRole(authServ.roles[0])){
-                    <a routerLink="user-list" routerLinkActive="active" class="list-group-item list-group-item-action">
+                    <a routerLink="user-list" routerLinkActive="bg-theme text-white" class="list-group-item list-group-item-action">
                         Users list
                     </a>
-                    <a routerLink="add-user" routerLinkActive="active" class="list-group-item list-group-item-action">
+                    <a routerLink="add-user" routerLinkActive="bg-theme text-white" class="list-group-item list-group-item-action">
                         New user
                     </a>
                 }@else if (authServ.checkRole(authServ.roles[1])) {
                     @for(acc of accounts; track acc){
                         @if(acc.type==="CA"){
-                            <a [routerLink]="['operation-list', acc.id]" routerLinkActive="active" class="list-group-item list-group-item-action">
+                            <a [routerLink]="['operation-list', acc.id]" routerLinkActive="bg-theme text-white" class="list-group-item list-group-item-action">
                                 <a>Operations list (CA)</a>
                             </a>
                         } @else if(acc.type==="SA"){
-                            <a [routerLink]="['operation-list', acc.id]" routerLinkActive="active" class="list-group-item list-group-item-action">
+                            <a [routerLink]="['operation-list', acc.id]" routerLinkActive="bg-theme text-white" class="list-group-item list-group-item-action">
                                 <a>Operations list (SA)</a>
                             </a>
                         }

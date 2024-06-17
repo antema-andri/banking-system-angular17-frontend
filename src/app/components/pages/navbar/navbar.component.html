@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-lg back-header py-0" data-bs-theme="dark">
+<nav class="navbar navbar-expand-lg bg-header py-0" data-bs-theme="dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Banking System</a>
+    <a class="navbar-brand px-2 bg-theme" href="#">Banking System</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -20,7 +20,7 @@
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             User Info
           </a>
-          <ul class="dropdown-menu dropdown-menu-end rounded-0 back-header">
+          <ul class="dropdown-menu dropdown-menu-end rounded-0 bg-header">
             <li><a class="dropdown-item">Role: {{currentUser.appRole.roleName}}</a></li>
             <li><a class="dropdown-item">Username: {{currentUser.username}}</a></li>
             @if(auth.checkRole(auth.roles[1])){

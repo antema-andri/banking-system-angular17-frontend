@@ -26,11 +26,12 @@ body{
 .custom-btn {
 	font-size: 20px;
 	border-radius: 5px !important;
-  background-color: rgb(99, 102, 241) !important;
+  /* background-color: rgb(99, 102, 241) !important; */
+  background-color: #0d8488 !important;
 }
 /*** end login ***/
 
-.back-header {
+.bg-header {
   background-color: #0f2b3d !important;
 }
 
@@ -69,4 +70,18 @@ body{
 
 .font {
   font-family: "Helvetica Neue",Roboto,Arial,sans-serif;
+}
+
+.bg-theme {
+  background-color: #0d8488 !important;
+}
+
+.text-theme {
+  color: #0d8488 !important;
+}
+
+.pagination>.active>a {
+  background-color: #0d8488 !important;
+  color: white !important;
+  border:none;
 }

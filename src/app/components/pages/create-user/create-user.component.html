@@ -32,7 +32,7 @@
                             [val]="''"
                             [currentForm]="'select'" 
                             [fg]="createUserFormGroup"
-                            [label]="'ROLES'" 
+                            [label]="'ROLE'" 
                             [show]="true">
                             <option value="" selected>No role selected</option>
                             @for (role of roles; track role) {
@@ -58,7 +58,7 @@
                         </app-form-input>
                         
                         <div class="d-grid gap-2">
-                            <button type="submit" class="btn btn-success" [disabled]="createUserFormGroup.invalid">Create user</button>
+                            <button type="submit" class="btn bg-theme border-0 text-white" [disabled]="createUserFormGroup.invalid">Create user</button>
                         </div>
                     </form>
                 </div>

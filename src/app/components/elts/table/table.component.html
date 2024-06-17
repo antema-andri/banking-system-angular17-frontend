@@ -50,7 +50,7 @@
 <nav aria-label="...">
     <ul class="pagination">
     @for (item of [].constructor(pageNumber); track item; let i=$index) {
-        <li class="page-item" [ngClass]="currentPage==i?'active':''">
+        <li class="page-item" [ngClass]="currentPage== i ? 'active' : ''">
             <a class="page-link" (click)="emitPaginateEvent(i)" style="cursor: pointer;">
                 {{i+1}}
             </a>
