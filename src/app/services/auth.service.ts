@@ -19,7 +19,7 @@ export class AuthService {
 
   async signInApi(login:string , pswd:string):Promise<any>{
     const res=await this.api.post('/auth/token', {username: login, password: pswd})
-    this.user=JSON.parse(String(res.body.user));
+    this.user=res.body as User;
     const infoUser:InfoUser={
       token: res.headers.get("Authorization"),
       user: this.user,

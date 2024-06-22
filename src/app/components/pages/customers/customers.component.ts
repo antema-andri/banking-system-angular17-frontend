@@ -23,6 +23,7 @@ export class CustomersComponent implements OnInit{
   public auth=inject(AuthService);
   customers!:Customer[];
   searchForm = new FormControl();
+  pages=10;
 
   ngOnInit(): void {
     this.loadCustomers();

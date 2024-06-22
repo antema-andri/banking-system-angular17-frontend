@@ -27,7 +27,7 @@ export class ApiService {
   }
 
   setAuthToken(token:string) {
-    this.httpOptions.headers=this.httpOptions.headers.set('Authorization', `Bearer ${token}`);
+    this.httpOptions.headers=this.httpOptions.headers.set('Authorization', `${token}`);
     this.token = token;
   }
 

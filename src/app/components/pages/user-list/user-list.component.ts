@@ -20,6 +20,7 @@ export class UserListComponent implements OnInit {
   users!:User[];
   userTabs!:UserTable[];
   searchForm:FormControl=new FormControl();
+  pages=1;
 
   ngOnInit(): void {
     this.loadUsers();
